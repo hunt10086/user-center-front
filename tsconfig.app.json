@@ -1,0 +1,44 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.app.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": [
+      "vite/client",
+      "axios",
+      "unplugin-icons/types/vue"
+    ],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable",
+      "ES2015.Symbol"
+    ],
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "composite": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "declarationDir": "./dist/types",
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*",
+    "types/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/__tests__/*"
+  ]
+}
