@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getCurrentUser } from "@/api/user";
+import { getCurrentUser, userLogout } from "@/api/user";
 
 export const useLoginUserStore = defineStore("loginUser", () => {
   const loginUser = ref<any>({
@@ -20,5 +20,17 @@ export const useLoginUserStore = defineStore("loginUser", () => {
     loginUser.value = newLoginUser;
   }
 
-  return { loginUser, setLoginUser, fetchLoginUser };
+  async function logout() {
+    const res = await userLogout();
+    if (res.data.code === 0) {
+      // 清除用户状态
+      loginUser.value = {
+        userName: "未登录",
+      };
+      return true;
+    }
+    return false;
+  }
+
+  return { loginUser, setLoginUser, fetchLoginUser, logout };
 });

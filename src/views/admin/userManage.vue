@@ -22,6 +22,18 @@
           </div>
         </template>
 
+        <template v-else-if="column.dataIndex === 'gender'">
+          <div v-if="record.gender === 0">
+            <a-tag color="green">未知</a-tag>
+          </div>
+          <div v-if="record.gender===1">
+            <a-tag color="blue">男</a-tag>
+          </div>
+          <div v-if="record.gender===2">
+            <a-tag color="blue">女</a-tag>
+          </div>
+        </template>
+
         <template v-if="column.dataIndex === 'createTime'">
           <div>{{ new Date(record.createTime).toLocaleString() }}</div>
         </template>
@@ -35,7 +47,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { deleteUser, searchUsers } from '@/api/user'
+import { deleteUser, searchUser, searchUsers } from '@/api/user'
 import { message } from 'ant-design-vue'
 import { ref } from 'vue'
 
