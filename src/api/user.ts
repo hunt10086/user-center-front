@@ -27,11 +27,10 @@ export const userLogin = async (params: any) => {
  * 用户注销
  * @param params
  */
-export const userLogout = async (params: any) => {
+export const userLogout = async () => {
   return myAxios.request({
     url: "/api/user/logout",
     method: "POST",
-    data: params,
   });
 };
 
@@ -72,5 +71,33 @@ export const deleteUser = async (id: string) => {
     headers: {
       "Content-Type": "application/json",
     },
+  });
+};
+
+
+/**
+ *
+ * @param 更新个人信息
+ */
+export const updateUser = async (user: any) => {
+  return myAxios.request({
+    url: "/api/user/update",
+    method: "POST",
+    data: user,
+    // 关键点：要传递 JSON 格式的值
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * 获取用户
+ * @param username
+ */
+export const searchUser = async () => {
+  return myAxios.request({
+    url: "/api/user/searchOne",
+    method: "GET",
   });
 };

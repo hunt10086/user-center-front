@@ -5,6 +5,7 @@ import Login from '@/views/user/Login.vue'
 import Register from '@/views/user/Register.vue'
 import Manage from '@/views/admin/userManage.vue'
 import Support from '@/views/Support.vue'
+import UserUpdate from '@/views/user/Update.vue'
 type CustomRoute = {
   path: string,
   name?: string,
@@ -37,6 +38,11 @@ const routes:CustomRoute[] = [
     name: '赞助主包',
     component: Support
   },
+  {
+    path:'/user/update',
+    name:'用户修改',
+    component: UserUpdate
+  }
 ]
 
 const router = createRouter({

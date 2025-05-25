@@ -7,6 +7,9 @@ export const useLoginUserStore = defineStore("loginUser", () => {
     userName: "未登录",
   });
 
+
+
+
   async function fetchLoginUser() {
     const res = await getCurrentUser();
     if (res.data.code === 0 && res.data.data) {

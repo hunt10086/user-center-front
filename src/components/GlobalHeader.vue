@@ -16,11 +16,24 @@
           @click="doMenuClick"
         />
       </a-col>
-      <a-col flex="80px">
+      <a-col flex="120px">
         <div class="user-login-status">
-          <div v-if="loginUserStore.loginUser.id">
-            {{ loginUserStore.loginUser.userName ?? '昵称' }}
-          </div>
+          <a-dropdown v-if="loginUserStore.loginUser.id" placement="bottomRight">
+            <div class="user-info-wrapper">
+              {{ loginUserStore.loginUser.userName ?? '昵称' }}
+              <DownOutlined class="dropdown-icon" />
+            </div>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item key="logout" @click="logout">
+                  <template #icon>
+                    <LogoutOutlined />
+                  </template>
+                  注销登录
+                </a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
           <div v-else>
             <a-button type="primary" href="http://123.249.124.78:8000">首页</a-button>
           </div>
@@ -31,10 +44,13 @@
 </template>
 <script lang="ts" setup>
 import { h, ref } from 'vue'
+import { message } from 'ant-design-vue';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue'
 import type { MenuProps } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 import { useLoginUserStore } from '@/store/useLoginUserStore.ts'
+import { userLogout } from '@/api/user'
+import { LogoutOutlined,DownOutlined } from '@ant-design/icons-vue'
 
 const loginUserStore = useLoginUserStore()
 loginUserStore.fetchLoginUser()
@@ -46,6 +62,18 @@ const doMenuClick = ({ key }: { key: any }) => {
     path: key,
   })
 }
+
+const logout = async () => {
+  try {
+    await userLogout()
+    loginUserStore.logout()
+    alert('注销成功')
+    router.push('/user/login')
+  } catch (e) {
+    console.error('注销失败:', e)
+  }
+}
+
 
 // 当前选中菜单
 const current = ref<string[]>([])
@@ -82,6 +110,11 @@ const items = ref<MenuProps['items']>([
     label: '赞助主包',
     title: '赞助主包',
   },
+  {
+    key: '/user/update',
+    label: '修改信息',
+    title: '修改信息',
+  }
   // {
   //   key: 'alipay',
   //   label: h('a', { href: 'https://antdv.com', target: '_blank' }, 'Navigation Four - Link'),
