@@ -1,12 +1,8 @@
 import axios from 'axios'
 
-// const BASE_URL = import.meta.env.DEV  // Vue3推荐用法
-//   ? "http://localhost:8080"
-//   : "http://123.249.124.78:8080";
-
 const BASE_URL = import.meta.env.MODE === 'development'
   ? "http://localhost:8080"
-  : "http://123.249.124.78:8080";
+  : "域名";
 
 const myAxios = axios.create({
   baseURL: BASE_URL, //process.env.NODE_ENV === "development" ? "http://localhost:8080" : "http://123.249.124.78:8080 ",
