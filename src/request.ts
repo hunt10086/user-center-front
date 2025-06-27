@@ -5,7 +5,7 @@ const BASE_URL = import.meta.env.MODE === 'development'
   : "域名";
 
 const myAxios = axios.create({
-  baseURL: BASE_URL, //process.env.NODE_ENV === "development" ? "http://localhost:8080" : "http://123.249.124.78:8080 ",
+  baseURL: BASE_URL,
   timeout: 10000,
   withCredentials: true,
 })
